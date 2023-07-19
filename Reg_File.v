@@ -32,24 +32,26 @@ module Reg_File
 
     reg [31:0] REG [0:31];
 
-    always @(posedge clk, negedge rst ) 
+    integer i;
+    initial 
+    begin
+        for (i =0 ;i<32 ;i=i+1 ) 
+        begin
+            REG[i]=0;    
+        end
+    end
+
+    always @(posedge clk) 
     begin
 
-        REG[A1]=REG[A1];
-        REG[A2]=REG[A2];
-
-        if (!rst) 
-            begin
-                REG[A1]=32'b0;
-                REG[A2]=32'b0;    
-            end
-        else if(WE)
+        
+        if(WE)
             begin
                 REG[A3]=WD3;
             end    
     end
 
-    always @(A1,A2) 
+    always @(*) 
             begin
                 RD1=REG[A1];
                 RD2=REG[A2];    

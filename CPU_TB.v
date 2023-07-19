@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 07/02/2023 04:22:45 PM
+// Create Date: 07/19/2023 03:05:35 PM
 // Design Name: 
-// Module Name: Instruction_Memory
+// Module Name: CPU_TB
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,24 +20,28 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Instruction_Memory(
-    input [31:0] Addr_sig,
-    output reg [31:0] Inst_sig
-    );
+module CPU_TB();
 
-    reg [31:0] mem [0:63];
+reg clk,arst;
+CPU DUT (.clk(clk),.arst(arst));
 
-    initial 
-    begin
-        $readmemh("TEST1.mem",mem);
-        //read from Prog.txt    
+initial 
+begin
+    clk=1'b0;
+    forever begin
+        #10 clk=~clk;
     end
+end
 
-    always @(*) 
-    begin
-        Inst_sig=mem[Addr_sig[31:2]];    
-    end
+initial 
+begin
+    #2000 $stop;
+end
 
-
-
+initial 
+begin
+   arst=1'b0;
+   #5
+   arst=1'b1; 
+end
 endmodule

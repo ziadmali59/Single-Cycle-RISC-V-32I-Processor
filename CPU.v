@@ -25,7 +25,7 @@ module CPU(
     );
     //PC Signals
     wire PCsrc,load;
-    assign load=1;
+    assign load=1'b1;
     wire [31:0] ImmExt,PC_Out;
     //Instruction Memory Signals
     wire [31:0] Inst;

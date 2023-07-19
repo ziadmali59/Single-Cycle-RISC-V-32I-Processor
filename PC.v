@@ -48,7 +48,7 @@ always @(*)
                 case (PCsrc)
                     1'b0:Q_next=Q_reg+4;
                     1'b1:Q_next=Q_reg+ImmExt; 
-                    default: Q_next=32'b0;
+                    default: Q_next=Q_reg+4;
                 endcase
             end
 

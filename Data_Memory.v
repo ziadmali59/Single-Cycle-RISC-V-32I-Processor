@@ -29,7 +29,10 @@ module Data_Memory
     reg [31:0] Data_memo [0:63];
     always @(posedge clk ) 
     begin
+        if(WE)
+        begin
         Data_memo[A[31:2]]<=WD;
+        end
     end
 
     always @(*) 

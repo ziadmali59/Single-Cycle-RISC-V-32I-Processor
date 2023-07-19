@@ -36,66 +36,55 @@ module ALU(
                 begin
                     tempResult={1'b0,srcA}+{1'b0,srcB};
                     ALUresult=tempResult[31:0];
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];
                 end
             3'b001:
                 begin
                     ALUresult=srcA<<srcB;
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];
                 end
             
             3'b010:
                 begin
                     tempResult={1'b0,srcA}-{1'b0,srcB};
-                    ALUresult=tempResult[31:0];
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];                  
+                    ALUresult=tempResult[31:0];                 
                 end
             
             3'b011:
                 begin
                     ALUresult=srcA^srcB;
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];
                 end
             
             3'b100:
                 begin
                     ALUresult=srcA^srcB;
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];
                 end
             3'b101:
                 begin
                     ALUresult=srcA>>|srcB;
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];
                 end
             3'b110:
                 begin
                     ALUresult=srcA|srcB;
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];
-                    
                 end
             
             3'b111:
                 begin
                     ALUresult=srcA&srcB;
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];
-                    
                 end
             
             default:
                 begin
-                    ALUresult=32'b0;
-                    Zero_flag=~(|ALUresult);
-                    SIGN_flag=ALUresult[31];
-                    
+                    ALUresult=32'b0; 
                 end
-        endcase    
+        endcase
+        if (ALUresult==0) 
+        begin
+            Zero_flag=1;    
+        end
+        else
+            begin
+            Zero_flag=0;
+            end
+        SIGN_flag=ALUresult[31];    
     end
+
 endmodule
